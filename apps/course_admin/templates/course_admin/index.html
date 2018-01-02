@@ -20,14 +20,13 @@
 {% endif %}
 
 			<form action="{% url 'course_admin_new' %}" method="POST">
-{% csrf_token %}
+				{% csrf_token %}
 				<label for="name">Name:</label>
 				<input type="text" name="name" id="name" {% if name %} value="{{name}}"{% endif %}>
 				<label for="description">Description:</label>
 				<textarea name="description" id="description" placeholder="Insert course description. It must be more than 15 characters.">{% if description %}{{description}}{% endif %}</textarea>
 				<input id="new" type="submit" value="Add">
 			</form>
-{% for course in courses %}
 			<table>
 				<caption>Courses</caption>
 				<thead>
@@ -39,6 +38,7 @@
 					</tr>
 				</thead>
 				<tbody>
+{% for course in courses %}
 					<tr class="{% cycle 'odd' 'even' %}">
 						<td>{{course.name}}</td>
 						<td>{{course.descriptions.desc}}</td>
@@ -47,11 +47,9 @@
 							<a class="link" href="{% url 'course_admin_destroy' id=course.id %}">Remove</a>
 						</td>
 					</tr>
+{% endfor %}
 				</tbody>
 			</table>
-{% empty %}
-			<h2 class="error">Course database is empty</h2>
-{% endfor %}
 		</div>
 	</body>
 </html>
