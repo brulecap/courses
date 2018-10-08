@@ -18,7 +18,7 @@ class Course(models.Model):
 		return "<Course object: {}>".format(self.name)
 class Description(models.Model):
 	desc = models.TextField()
-	course = models.OneToOneField(Course, related_name="descriptions")
+	course = models.OneToOneField(Course, related_name="descriptions",on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add = True)
 	updated_at = models.DateTimeField(auto_now = True)
 	def __repr__(self):
